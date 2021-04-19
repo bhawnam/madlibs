@@ -42,6 +42,31 @@ def greet_person():
                            compliment=compliment)
 
 
+@app.route('/game')
+def show_madlib_form():
+
+    yes_or_no = request.args.get("game")
+
+    if yes_or_no == "no":
+        return render_template("goodbye.html")
+
+    else:
+        return render_template("game.html")
+
+
+@app.route('/madlib')
+def show_madlib():
+
+    user_name = request.args.get("person")
+    user_color = request.args.get("color")
+    user_noun = request.args.get("noun")
+    user_adjective = request.args.get("adjective")
+
+    return render_template("madlib.html", 
+                            name = user_name, color = user_color, 
+                            noun = user_noun, adjective = user_adjective)
+
+
 if __name__ == '__main__':
     # Setting debug=True gives us error messages in the browser and also
     # "reloads" our web app if we change the code.
